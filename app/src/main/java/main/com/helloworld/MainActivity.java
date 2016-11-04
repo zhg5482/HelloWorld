@@ -3,11 +3,18 @@ package main.com.helloworld;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class MainActivity extends Activity {
 
@@ -27,6 +34,12 @@ public class MainActivity extends Activity {
                 EditText hellotv = (EditText) findViewById(R.id.tx1);
 
                 String message = hellotv.getText().toString();
+
+                //请求接口
+                String httpUrl = "http://dev.a.medbanks.cn:8080/user/login?username=test&password=medbankssipai";
+                //String para = "username=test&password=medbankssipai";
+
+                //System.exit(-1);
 
                 if (message.equals("")) {
                     message = "输入有误!";
