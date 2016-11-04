@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
                 //p=Pattern.compile("[\u4e00-\u9fa5]");
                 Matcher m = p.matcher(message);
 
-                if(m.matches()){
+                if(m.matches() && !message.equals("")){
                     Intent intent = new Intent(MainActivity.this,Main2Activity.class);
                     String num1 = "3444";
                     String num2 = "sgsdg";

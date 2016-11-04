@@ -33,6 +33,7 @@ public class Main2Activity extends AppCompatActivity {
         //saveFrom();
 
         openWebView();
+        backward();
 
     }
 
@@ -98,6 +99,20 @@ public class Main2Activity extends AppCompatActivity {
 
                 webview.loadUrl("https://www.baidu.com/"); //加载需要显示的网页
                 webview.setWebViewClient(new WebViewClient()); //设置web视图
+            }
+        });
+    }
+
+
+    /**
+     * webview 渲染网页
+     */
+    private void backward(){
+        mBackwardbButton   = (Button) findViewById(R.id.button_backward);
+        mBackwardbButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
