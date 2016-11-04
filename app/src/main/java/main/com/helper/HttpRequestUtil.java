@@ -25,7 +25,7 @@ public class HttpRequestUtil {
 
     static boolean proxySet = false;
     static String proxyHost = "127.0.0.1";
-    static int proxyPost = 8087;
+    static int proxyPost = 8080;
 
     /**
      * 编码

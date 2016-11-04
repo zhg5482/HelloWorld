@@ -37,7 +37,7 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     /**
-     * 加载页面布局
+     * 加载视图
      */
     private void setupViews(){
         super.setContentView(R.layout.activity_main2);
