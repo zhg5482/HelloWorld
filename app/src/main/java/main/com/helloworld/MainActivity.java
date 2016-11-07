@@ -15,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -24,9 +23,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import main.com.helper.HttpUtils;
-import main.com.helper.SerializableMap;
 
 
 public class MainActivity extends Activity {
@@ -70,7 +67,7 @@ public class MainActivity extends Activity {
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("map",myMap);
                             intent.putExtras(bundle);*/
-
+                            //Log.i("++++++",content);
                             startActivity(intent);
                         }else{
                             Toast.makeText(MainActivity.this, "用户名密码错误", Toast.LENGTH_SHORT).show();
@@ -160,7 +157,8 @@ public class MainActivity extends Activity {
          * 在你获取的string这个JSON对象中，提取你所需要的信息。
          */
 
-
+        //Log.i("++++++======",object.toString());
+        //Log.i("++++++======",object["code"]);
         JSONObject ObjectInfo = object.optJSONObject("data");
 
         if(null == ObjectInfo){

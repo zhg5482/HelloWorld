@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -33,8 +34,6 @@ public class Main2Activity extends AppCompatActivity {
 
         setupViews();  //加载 activity_title 布局,并获取标题及两侧按钮
 
-        setIntent();
-
         //saveFrom();
 
         openWebView();
@@ -50,29 +49,18 @@ public class Main2Activity extends AppCompatActivity {
         TextView title = (TextView)findViewById(R.id.text_title);
         title.setText("Hello Android");
 
-        //mTitleTextView   = (TextView)findViewById(R.id.text_title);
-        //mContentLayout   = (FrameLayout) findViewById(R.id.layout_content);
-        //mBackwardbButton = (Button) findViewById(R.id.button_backward);
-        //mForwardButton   = (Button) findViewById(R.id.button_forward);
-    }
-
-    /**
-     * 接受参数
-     * toast 提示
-     */
-    private void setIntent(){
-
         Intent intent = getIntent();
         //Bundle bundle = getIntent().getExtras();
         //SerializableMap serializableMap = (SerializableMap) bundle.get("map");
 
-        String content = intent.getStringExtra("content");
+        String content = intent.getStringExtra("content").toString();
 
         EditText edittext = (EditText) findViewById(R.id.tx5);
         edittext.setText(content);
-        //Log.i("====",content);
+        Log.i("====++++",content);
         //Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
+
 
     /**
      * 打开浏览器
@@ -103,6 +91,9 @@ public class Main2Activity extends AppCompatActivity {
 
                 LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_edit2); //隐藏控件
                 linearLayout.setVisibility(View.INVISIBLE);
+
+                LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.webxml); //显示控件
+                linearLayout2.setVisibility(View.VISIBLE);
 
                 webview = (WebView) findViewById(R.id.webview);
 
