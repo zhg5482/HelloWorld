@@ -21,6 +21,10 @@
         android:orientation="horizontal"
         android:background="@android:color/white">
 
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <EditText
             android:id="@+id/tx5"
             android:layout_width="match_parent"
