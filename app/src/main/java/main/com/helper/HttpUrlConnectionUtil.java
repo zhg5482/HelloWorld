@@ -1,9 +1,5 @@
 package main.com.helper;
 
-import android.os.Debug;
-import android.util.Log;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;

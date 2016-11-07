@@ -14,8 +14,6 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
-import javax.net.ssl.HttpsURLConnection;
-
 /**
  * Http 请求工具类
  * Created by zhg-pc on 16/11/4.
