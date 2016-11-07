@@ -1,10 +1,12 @@
 package main.com.entry;
 
+import java.io.Serializable;
+
 /**
  * Created by zhg-pc on 16/11/7.
  */
 
-public class User {
+public class User implements Serializable{
 
     private int userid;
     private String username;
