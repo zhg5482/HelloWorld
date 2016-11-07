@@ -11,15 +11,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Handler;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.logging.LogRecord;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 import main.com.helper.HttpUtils;
+import main.com.helper.SerializableMap;
 
 
 public class MainActivity extends Activity {
@@ -32,13 +39,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getJsonByInternet("http://test.api.medbanks.cn/user/login?username=13812345678&password=medbankstest");
-
-        /*HttpUrlThread httpUrlThread = new HttpUrlThread();
-        Log.i("=====","ggee");
-        httpUrlThread.getjson("http://test.api.medbanks.cn/user/login?username=13812345678&password=medbankstest");
-*/
-        login();
+        login();//登录
     }
 
     /**
@@ -48,10 +49,35 @@ public class MainActivity extends Activity {
         public void handleMessage(android.os.Message msg){
             switch (msg.what){
                 case MSG_UPDATE_TEXT:
-                    if(mStrContent != null)
-                        Log.i("handle",mStrContent);
-                    break;
+                    if(mStrContent != null){
 
+                        String content = "";
+                        Map<String, String> map = JSONAnalysis(mStrContent);
+
+                        if(null != map){
+                            Iterator iter = map.keySet().iterator();
+                            while (iter.hasNext()) {
+                                String key = iter.next().toString();
+                                String val = map.get(key);
+                                content += key+": "+val+"\n";
+                            }
+
+                            //访问Main2Activity
+                            Intent intent = new Intent(MainActivity.this,Main2Activity.class);
+                            intent.putExtra("content",content);
+                           /* final SerializableMap myMap = new SerializableMap();
+                            myMap.setMap(map);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("map",myMap);
+                            intent.putExtras(bundle);*/
+
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(MainActivity.this, "用户名密码错误", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    break;
                 default:
                     break;
             }
@@ -68,28 +94,24 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //得到textview实例
-                EditText hellotv = (EditText) findViewById(R.id.tx1);
+                EditText hellotv1 = (EditText) findViewById(R.id.tx1);
+                EditText hellotv2 = (EditText) findViewById(R.id.tx2);
 
-                String message = hellotv.getText().toString();
+                String username = hellotv1.getText().toString();
+                String password = hellotv2.getText().toString();
 
                 Pattern p = Pattern.compile("[0-9]*");
                 //p=Pattern.compile("[a-zA-Z]");
                 //p=Pattern.compile("[\u4e00-\u9fa5]");
-                Matcher m = p.matcher(message);
+                Matcher m = p.matcher(username);
 
-                if(m.matches() && !message.equals("")){
+                if(m.matches() && !username.equals("")){
                     //请求接口
-                    //getJsonByInternet("http://test.api.medbanks.cn/user/login?username=13812345678&password=medbankstest");
+                    String url = "http://test.api.medbanks.cn/user/login?username="+username+"&password="+password;
+                    getJsonByInternet(url);
 
-                    Intent intent = new Intent(MainActivity.this,Main2Activity.class);
-                    String num1 = "3444";
-                    String num2 = "sgsdg";
-                    intent.putExtra("one",num1);
-                    intent.putExtra("two",num2);
-                    startActivity(intent);
                 }else{
-                    message = "输入有误! 不能为空或非数字!";
-                    Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "输入有误! 不能为空或非数字!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -113,7 +135,6 @@ public class MainActivity extends Activity {
                         InputStream is = conn.getInputStream();
                         String result = HttpUtils.readMyInputStream(is);
                         mStrContent = result.toString();
-                        Log.i("====",mStrContent);
                         handler.sendEmptyMessage(MSG_UPDATE_TEXT);
 
                     }
@@ -124,4 +145,37 @@ public class MainActivity extends Activity {
         }.start();
     }
 
+    /**
+     * json 解析
+     * @param string
+     */
+    protected Map<String, String> JSONAnalysis(String string) {
+        JSONObject object = null;
+        try {
+            object = new JSONObject(string);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        /**
+         * 在你获取的string这个JSON对象中，提取你所需要的信息。
+         */
+
+
+        JSONObject ObjectInfo = object.optJSONObject("data");
+
+        if(null == ObjectInfo){
+            return  null;
+        }
+
+        Map<String, String> map =
+                new HashMap<String, String>();
+        if(null != ObjectInfo){
+
+            map.put("userid",ObjectInfo.optString("userid"));
+            map.put("username",ObjectInfo.optString("username"));
+            map.put("nickname",ObjectInfo.optString("nickname"));
+            map.put("avatar",ObjectInfo.optString("avatar"));
+        }
+        return map;
+    }
 }

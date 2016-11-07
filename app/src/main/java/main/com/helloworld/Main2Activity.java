@@ -9,9 +9,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Iterator;
+
+import main.com.helper.SerializableMap;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -28,7 +33,7 @@ public class Main2Activity extends AppCompatActivity {
 
         setupViews();  //加载 activity_title 布局,并获取标题及两侧按钮
 
-        //setIntent();
+        setIntent();
 
         //saveFrom();
 
@@ -58,9 +63,15 @@ public class Main2Activity extends AppCompatActivity {
     private void setIntent(){
 
         Intent intent = getIntent();
-        String one = intent.getStringExtra("one");
+        //Bundle bundle = getIntent().getExtras();
+        //SerializableMap serializableMap = (SerializableMap) bundle.get("map");
 
-        Toast.makeText(this, one, Toast.LENGTH_SHORT).show();
+        String content = intent.getStringExtra("content");
+
+        EditText edittext = (EditText) findViewById(R.id.tx5);
+        edittext.setText(content);
+        //Log.i("====",content);
+        //Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -89,6 +100,9 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(Main2Activity.this, "reer", Toast.LENGTH_SHORT).show();
+
+                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_edit2); //隐藏控件
+                linearLayout.setVisibility(View.INVISIBLE);
 
                 webview = (WebView) findViewById(R.id.webview);
 
