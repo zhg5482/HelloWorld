@@ -68,6 +68,7 @@ public class MainActivity extends Activity {
                             bundle.putSerializable("map",myMap);
                             intent.putExtras(bundle);*/
                             //Log.i("++++++",content);
+                            Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         }else{
                             Toast.makeText(MainActivity.this, "用户名密码错误", Toast.LENGTH_SHORT).show();
