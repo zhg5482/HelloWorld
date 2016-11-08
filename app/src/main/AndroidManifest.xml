@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".BookManagerActivity"></activity>
+        <activity android:name=".BookManagerActivity" />
+        <activity android:name=".NotesActivity"></activity>
     </application>
 
 </manifest>

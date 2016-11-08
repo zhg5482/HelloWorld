@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="a73b2bda50776e2a1539c028666d58c40e14d2cd">
+        sha1="6567cd5c5b8be45da0f0b2e4678712f4239a960c">
         <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_2296fabe19411864f8bec55d9f014c2e64260b0e/classes.dex" />
     </item>
     <item

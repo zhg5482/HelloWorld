@@ -4,26 +4,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 
 public class Main2Activity extends Activity {
 
-    private TextView mTitleTextView;
     private Button mBackwardbButton;
     private Button mForwardButton;
-    private FrameLayout mContentLayout;
     private WebView webview;
 
 
@@ -31,12 +25,15 @@ public class Main2Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setupViews();  //加载 activity_title 布局,并获取标题及两侧按钮
+        setupViews();  //加载 activity_title 布局,并获取标题及两侧按钮 读取数据
 
         //saveFrom();
 
-        openWebView();
-        backward();
+        openWebView();  //加载webview
+
+        openNotes();
+
+        backward();   //返回到上一页
 
     }
 
@@ -130,5 +127,19 @@ public class Main2Activity extends Activity {
                 finish();
             }
         });
+    }
+
+    private void openNotes(){
+        Button notesBtn = (Button) findViewById(R.id.btn_text5);
+        notesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(Main2Activity.this, "打开记事本", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Main2Activity.this,NotesActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
