@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Handler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,7 +48,6 @@ public class MainActivity extends Activity {
             switch (msg.what){
                 case MSG_UPDATE_TEXT:
                     if(mStrContent != null){
-
                         String content = "";
                         Map<String, String> map = JSONAnalysis(mStrContent);
 
@@ -156,14 +156,13 @@ public class MainActivity extends Activity {
         /**
          * 在你获取的string这个JSON对象中，提取你所需要的信息。
          */
+        int code = object.optInt("code");  //请求是否成功
+        if(code != 0){
+            return null;
+        }
 
-        //Log.i("++++++======",object.toString());
-        //Log.i("++++++======",object["code"]);
         JSONObject ObjectInfo = object.optJSONObject("data");
 
-        if(null == ObjectInfo){
-            return  null;
-        }
 
         Map<String, String> map =
                 new HashMap<String, String>();
