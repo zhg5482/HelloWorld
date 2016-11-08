@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,20 +47,24 @@ public class MainActivity extends Activity {
             switch (msg.what){
                 case MSG_UPDATE_TEXT:
                     if(mStrContent != null){
-                        String content = "";
+
                         Map<String, String> map = JSONAnalysis(mStrContent);
 
                         if(null != map){
+                            //访问Main2Activity
+                            Intent intent = new Intent(MainActivity.this,Main2Activity.class);
+
                             Iterator iter = map.keySet().iterator();
                             while (iter.hasNext()) {
                                 String key = iter.next().toString();
                                 String val = map.get(key);
-                                content += key+": "+val+"\n";
+                                //content += key+": "+val+"\n";
+                                intent.putExtra(key,val);
+
                             }
 
-                            //访问Main2Activity
-                            Intent intent = new Intent(MainActivity.this,Main2Activity.class);
-                            intent.putExtra("content",content);
+                            Log.i("====++++",mStrContent+"++++");
+                            //intent.putExtra("content",content);
                            /* final SerializableMap myMap = new SerializableMap();
                             myMap.setMap(map);
                             Bundle bundle = new Bundle();

@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_below="@+id/tl_root"
-    android:visibility="invisible"
+    android:visibility="gone"
     android:id="@+id/webxml">
 
     <WebView

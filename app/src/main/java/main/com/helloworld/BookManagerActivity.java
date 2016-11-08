@@ -1,11 +1,11 @@
 package main.com.helloworld;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class BookManagerActivity extends AppCompatActivity {
+public class BookManagerActivity extends Activity {
 
     private static final String TAG = "BookManagerActivity";
     private static final int MESSAGE_NEW_BOOK_ARRIVED = 1;

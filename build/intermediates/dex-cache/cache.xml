@@ -3,6 +3,15 @@
 
     <item
         is-multidex="true"
+        jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_3f10de3b949bb168a417282c0967845321945d8c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
         jumboMode="true"
         optimize="true"
@@ -21,12 +30,39 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a73b2bda50776e2a1539c028666d58c40e14d2cd">
+        <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_2296fabe19411864f8bec55d9f014c2e64260b0e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_4d3e261a705237d2f08bca366e1bae7732ebd658/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
         <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_82a9374a572fade6f0b7c8af823fb18cc7755287/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/zhg-pc/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/glide-3.7.0_292ba9a8c0cf279d8fa255c716e3a9ae05ecd2ff/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -45,33 +81,6 @@
         revision="25.0.0"
         sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
         <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_4e5184869cfc1d2524d5df8c3203bdfdbb03d9c1/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_3f10de3b949bb168a417282c0967845321945d8c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3bb8d56d6160f849d935cf172c7fccf86591a9b8">
-        <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_2296fabe19411864f8bec55d9f014c2e64260b0e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_4d3e261a705237d2f08bca366e1bae7732ebd658/classes.dex" />
     </item>
 
 </items>

@@ -2,7 +2,7 @@ package main.com.helloworld;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,16 +10,15 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Iterator;
+import com.bumptech.glide.Glide;
 
-import main.com.helper.SerializableMap;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends Activity {
 
     private TextView mTitleTextView;
     private Button mBackwardbButton;
@@ -53,11 +52,22 @@ public class Main2Activity extends AppCompatActivity {
         //Bundle bundle = getIntent().getExtras();
         //SerializableMap serializableMap = (SerializableMap) bundle.get("map");
 
-        String content = intent.getStringExtra("content").toString();
+        String userid = intent.getStringExtra("userid").toString();
+        String username = intent.getStringExtra("username").toString();
+        String nickname = intent.getStringExtra("nickname").toString();
+        String avatar = intent.getStringExtra("avatar").toString();
 
-        EditText edittext = (EditText) findViewById(R.id.tx5);
-        edittext.setText(content);
-        Log.i("====++++",content);
+
+        ImageView img5 = (ImageView) this.findViewById(R.id.img5);
+
+        Glide.with(getBaseContext())  //ImageView 显示图片
+                .load(Uri.parse(avatar))
+                .into(img5);
+
+        ((TextView) this.findViewById(R.id.txt5_1)).setText("用户编号: "+userid);
+        ((TextView) this.findViewById(R.id.txt5_2)).setText("用户名: "+username);
+        ((TextView) this.findViewById(R.id.txt5_3)).setText("用户昵称: "+nickname);
+        //this.findViewById(R.id.txt5_1).
         //Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
@@ -90,7 +100,7 @@ public class Main2Activity extends AppCompatActivity {
                 //Toast.makeText(Main2Activity.this, "reer", Toast.LENGTH_SHORT).show();
 
                 LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_edit2); //隐藏控件
-                linearLayout.setVisibility(View.INVISIBLE);
+                linearLayout.setVisibility(View.GONE);
 
                 LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.webxml); //显示控件
                 linearLayout2.setVisibility(View.VISIBLE);

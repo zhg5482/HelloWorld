@@ -7,25 +7,68 @@
     tools:context="main.com.helloworld.Main2Activity">
 
     <include layout="@layout/title_bar" />
+
     <LinearLayout
         android:id="@+id/ll_edit2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tl_root"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
-        android:orientation="horizontal"
-        android:background="@android:color/white">
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/tx5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/black"/>
+        <ImageView
+            android:id="@+id/img5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           />
     </LinearLayout>
-    <include layout="@layout/webview"/>
+
+    <RelativeLayout
+        android:layout_below="@+id/ll_edit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/txt5_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#FFFddd"
+            android:textColor="#131212"
+            android:textSize="20dp"
+            android:text="ereer"/>
+
+        <TextView
+            android:layout_below="@+id/txt5_1"
+            android:id="@+id/txt5_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#FFFddd"
+            android:textColor="#131212"
+            android:textSize="20dp"
+            android:text="dgergre"/>
+
+        <TextView
+            android:layout_below="@+id/txt5_2"
+            android:id="@+id/txt5_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#FFFddd"
+            android:textColor="#131212"
+            android:textSize="20dp"
+            android:text="dgergre"/>
+
+
+    </RelativeLayout>
+    <include layout="@layout/webview" />
 
 </RelativeLayout>
