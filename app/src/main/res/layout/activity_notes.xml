@@ -4,8 +4,25 @@
     android:id="@+id/activity_notes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="main.com.helloworld.NotesActivity">
+    tools:context="main.com.helloworld.NotesActivity"
+    android:background="@android:color/white">
 
     <include layout="@layout/title_bar" />
+
+    <LinearLayout
+        android:layout_below="@+id/tl_root"
+        android:id="@+id/note_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输出记录信息"
+            android:textColorHint="#a49f9f"
+            android:textColor="#212020"
+            android:background="@android:color/white"/>
+    </LinearLayout>
 
 </RelativeLayout>
