@@ -20,11 +20,18 @@ public class User implements Serializable{
     private String info;
     private String title;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "nickname='" + nickname + '\'' +
-                '}';
+    public User(int userid, String username, String nickname, String avatar, String email, String phone, int group_id, int group, int g_id, String info, String title) {
+        this.userid = userid;
+        this.username = username;
+        this.nickname = nickname;
+        this.avatar = avatar;
+        this.email = email;
+        this.phone = phone;
+        this.group_id = group_id;
+        this.group = group;
+        this.g_id = g_id;
+        this.info = info;
+        this.title = title;
     }
 
     public int getUserid() {
