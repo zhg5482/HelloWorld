@@ -30,11 +30,29 @@ public class MainActivity extends Activity {
 
     private String mStrContent = null;
     private static final int MSG_UPDATE_TEXT = 1;
+    private EditText hellotv1;
+    private EditText hellotv2;
+    private String username;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //得到textview实例
+        hellotv1 = (EditText) findViewById(R.id.tx1);
+        hellotv2 = (EditText) findViewById(R.id.tx2);
+
+
+        username = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "name", "");
+        password = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "pass", "");
+
+        if (username != null || password != null) {
+            hellotv1.setText(username);
+            hellotv2.setText(password);
+        }
+
 
         login();//登录
     }
@@ -43,27 +61,27 @@ public class MainActivity extends Activity {
      * 主线程
      */
     private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg){
-            switch (msg.what){
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
                 case MSG_UPDATE_TEXT:
-                    if(mStrContent != null){
+                    if (mStrContent != null) {
 
                         Map<String, String> map = JSONAnalysis(mStrContent);
 
-                        if(null != map){
+                        if (null != map) {
                             //访问Main2Activity
-                            Intent intent = new Intent(MainActivity.this,Main2Activity.class);
+                            Intent intent = new Intent(MainActivity.this, Main2Activity.class);
 
                             Iterator iter = map.keySet().iterator();
                             while (iter.hasNext()) {
                                 String key = iter.next().toString();
                                 String val = map.get(key);
                                 //content += key+": "+val+"\n";
-                                intent.putExtra(key,val);
+                                intent.putExtra(key, val);
 
                             }
 
-                            Log.i("====++++",mStrContent+"++++");
+                            Log.i("====++++", mStrContent + "++++");
                             //intent.putExtra("content",content);
                            /* final SerializableMap myMap = new SerializableMap();
                             myMap.setMap(map);
@@ -73,7 +91,9 @@ public class MainActivity extends Activity {
                             //Log.i("++++++",content);
                             Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
-                        }else{
+
+
+                        } else {
                             Toast.makeText(MainActivity.this, "用户名密码错误", Toast.LENGTH_SHORT).show();
                         }
 
@@ -83,47 +103,54 @@ public class MainActivity extends Activity {
                     break;
             }
             super.handleMessage(msg);
-        };
+        }
     };
+
+
     /**
      * 登录
      */
-    private void login(){
+    private void login() {
         //得到按钮实例
         Button hellobtn = (Button) findViewById(R.id.btn1);
         hellobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //得到textview实例
-                EditText hellotv1 = (EditText) findViewById(R.id.tx1);
-                EditText hellotv2 = (EditText) findViewById(R.id.tx2);
 
-                String username = hellotv1.getText().toString();
-                String password = hellotv2.getText().toString();
+                username = hellotv1.getText().toString();
+                password = hellotv2.getText().toString();
+
 
                 Pattern p = Pattern.compile("[0-9]*");
                 //p=Pattern.compile("[a-zA-Z]");
                 //p=Pattern.compile("[\u4e00-\u9fa5]");
                 Matcher m = p.matcher(username);
 
-                if(m.matches() && !username.equals("")){
+                if (m.matches() && !username.equals("")) {
                     //请求接口
-                    String url = "http://test.api.medbanks.cn/user/login?username="+username+"&password="+password;
+                    String url = "http://test.api.medbanks.cn/user/login?username=" + username + "&password=" + password;
                     getJsonByInternet(url);
 
-                }else{
+                    /**
+                     * 保存登录信息
+                     **/
+                    PreferenceUtil.putObject(getSharedPreferences("haha", MODE_PRIVATE), "name", username);
+                    PreferenceUtil.putObject(getSharedPreferences("haha", MODE_PRIVATE), "pass", password);
+                } else {
                     Toast.makeText(MainActivity.this, "输入有误! 不能为空或非数字!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     /**
      * 请求接口
+     *
      * @param path
      */
     public void getJsonByInternet(final String path) {
         new Thread() {
-            public  void run() {
+            public void run() {
                 int code;
                 try {
                     URL url = new URL(path);
@@ -142,12 +169,15 @@ public class MainActivity extends Activity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            };
+            }
+
+            ;
         }.start();
     }
 
     /**
      * json 解析
+     *
      * @param string
      */
     protected Map<String, String> JSONAnalysis(String string) {
@@ -161,7 +191,7 @@ public class MainActivity extends Activity {
          * 在你获取的string这个JSON对象中，提取你所需要的信息。
          */
         int code = object.optInt("code");  //请求是否成功
-        if(code != 0){
+        if (code != 0) {
             return null;
         }
 
@@ -170,12 +200,12 @@ public class MainActivity extends Activity {
 
         Map<String, String> map =
                 new HashMap<String, String>();
-        if(null != ObjectInfo){
+        if (null != ObjectInfo) {
 
-            map.put("userid",ObjectInfo.optString("userid"));
-            map.put("username",ObjectInfo.optString("username"));
-            map.put("nickname",ObjectInfo.optString("nickname"));
-            map.put("avatar",ObjectInfo.optString("avatar"));
+            map.put("userid", ObjectInfo.optString("userid"));
+            map.put("username", ObjectInfo.optString("username"));
+            map.put("nickname", ObjectInfo.optString("nickname"));
+            map.put("avatar", ObjectInfo.optString("avatar"));
         }
         return map;
     }
