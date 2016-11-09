@@ -4,7 +4,8 @@
     android:id="@+id/activity_main2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="main.com.helloworld.Main2Activity">
+    tools:context="main.com.helloworld.Main2Activity"
+    android:background="@mipmap/icon2">
 
     <include layout="@layout/title_bar" />
 
@@ -37,8 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="#FFFddd"
-            android:textColor="#131212"
+            android:textColor="#1114b6"
             android:textSize="20dp"
             android:text="ereer"/>
 
@@ -49,8 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="#FFFddd"
-            android:textColor="#131212"
+            android:textColor="#1114b6"
             android:textSize="20dp"
             android:text="dgergre"/>
 
@@ -61,8 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="#FFFddd"
-            android:textColor="#131212"
+            android:textColor="#1114b6"
             android:textSize="20dp"
             android:text="dgergre"/>
 
