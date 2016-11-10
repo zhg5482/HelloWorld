@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 
     private String mStrContent = null;
     private static final int MSG_UPDATE_TEXT = 1;
+    private static String LOG_URL = "http://test.api.medbanks.cn/user/login";
     private EditText hellotv1;
     private EditText hellotv2;
     private String username;
@@ -39,20 +40,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //得到textview实例
-        hellotv1 = (EditText) findViewById(R.id.tx1);
-        hellotv2 = (EditText) findViewById(R.id.tx2);
-
-
-        username = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "name", "");
-        password = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "pass", "");
-
-        if (username != null || password != null) {
-            hellotv1.setText(username);
-            hellotv2.setText(password);
-        }
-
 
         login();//登录
     }
@@ -111,6 +98,19 @@ public class MainActivity extends Activity {
      * 登录
      */
     private void login() {
+
+        //得到textview实例
+        hellotv1 = (EditText) findViewById(R.id.tx1);
+        hellotv2 = (EditText) findViewById(R.id.tx2);
+
+        username = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "name", "");
+        password = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "pass", "");
+
+        if (username != null || password != null) {
+            hellotv1.setText(username);
+            hellotv2.setText(password);
+        }
+
         //得到按钮实例
         Button hellobtn = (Button) findViewById(R.id.btn1);
         hellobtn.setOnClickListener(new View.OnClickListener() {
@@ -121,14 +121,14 @@ public class MainActivity extends Activity {
                 password = hellotv2.getText().toString();
 
 
-                Pattern p = Pattern.compile("[0-9]*");
+                Pattern p = Pattern.compile("^[1][3-8][0-9]{9}$");
                 //p=Pattern.compile("[a-zA-Z]");
                 //p=Pattern.compile("[\u4e00-\u9fa5]");
                 Matcher m = p.matcher(username);
 
                 if (m.matches() && !username.equals("")) {
                     //请求接口
-                    String url = "http://test.api.medbanks.cn/user/login?username=" + username + "&password=" + password;
+                    String url = LOG_URL+"?username=" + username + "&password=" + password;
                     getJsonByInternet(url);
 
                     /**
