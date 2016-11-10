@@ -11,7 +11,10 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 
 public class Main2Activity extends Activity {
@@ -35,14 +38,61 @@ public class Main2Activity extends Activity {
 
         backward();   //返回到上一页
 
+
+
+
+    }
+
+
+    //第三种方式(Android1.6版本及以后的版本中提供了)
+    public void Btn3OnClick(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.bottom_btn1:
+                Toast.makeText(this, "bottom_btn1", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.bottom_btn2:
+                Toast.makeText(this, "bottom_btn2", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.bottom_btn3:
+                Toast.makeText(this, "bottom_btn3", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+
+    }
+
+    /**
+     * 底部菜单
+     * @param v
+     */
+    public void onClick(View v) {
+        RelativeLayout view = (RelativeLayout) v;
+        switch (view.getId()) {
+            case R.id.bottom_btn1:
+                Toast.makeText(Main2Activity.this, "bottom_btn1", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.bottom_btn2:
+                Toast.makeText(Main2Activity.this, "bottom_btn2", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.bottom_btn3:
+                Toast.makeText(Main2Activity.this, "bottom_btn3", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
     }
 
     /**
      * 加载视图
      */
-    private void setupViews(){
+    private void setupViews() {
         super.setContentView(R.layout.activity_main2);
-        TextView title = (TextView)findViewById(R.id.text_title);
+        TextView title = (TextView) findViewById(R.id.text_title);
         title.setText("Hello Android");
 
         Intent intent = getIntent();
@@ -61,9 +111,9 @@ public class Main2Activity extends Activity {
                 .load(Uri.parse(avatar))
                 .into(img5);
 
-        ((TextView) this.findViewById(R.id.txt5_1)).setText("用户编号: "+userid);
-        ((TextView) this.findViewById(R.id.txt5_2)).setText("用户名: "+username);
-        ((TextView) this.findViewById(R.id.txt5_3)).setText("用户昵称: "+nickname);
+        ((TextView) this.findViewById(R.id.txt5_1)).setText("用户编号: " + userid);
+        ((TextView) this.findViewById(R.id.txt5_2)).setText("用户名: " + username);
+        ((TextView) this.findViewById(R.id.txt5_3)).setText("用户昵称: " + nickname);
         //this.findViewById(R.id.txt5_1).
         //Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
@@ -72,8 +122,8 @@ public class Main2Activity extends Activity {
     /**
      * 打开浏览器
      */
-    private void saveFrom(){
-        mForwardButton   = (Button) findViewById(R.id.button_forward);
+    private void saveFrom() {
+        mForwardButton = (Button) findViewById(R.id.button_forward);
         mForwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,8 +139,8 @@ public class Main2Activity extends Activity {
     /**
      * webview 渲染网页
      */
-    private void openWebView(){
-        mForwardButton   = (Button) findViewById(R.id.button_forward);
+    private void openWebView() {
+        mForwardButton = (Button) findViewById(R.id.button_forward);
         mForwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,8 +169,8 @@ public class Main2Activity extends Activity {
     /**
      * webview 渲染网页
      */
-    private void backward(){
-        mBackwardbButton   = (Button) findViewById(R.id.button_backward);
+    private void backward() {
+        mBackwardbButton = (Button) findViewById(R.id.button_backward);
         mBackwardbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,14 +179,14 @@ public class Main2Activity extends Activity {
         });
     }
 
-    private void openNotes(){
+    private void openNotes() {
         Button notesBtn = (Button) findViewById(R.id.btn_text5);
         notesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(Main2Activity.this, "打开记事本", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(Main2Activity.this,NotesActivity.class);
+                Intent intent = new Intent(Main2Activity.this, NotesActivity.class);
                 startActivity(intent);
             }
         });

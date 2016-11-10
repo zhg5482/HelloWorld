@@ -26,6 +26,7 @@
         android:paddingLeft="5dp"
         android:text="返回"
         android:textColor="#ffffffff"
+        android:background="@android:color/holo_blue_dark"
         android:textSize="18dp" />
 
     <Button
@@ -39,6 +40,7 @@
         android:paddingLeft="5dp"
         android:text="提交"
         android:textColor="#ffffffff"
+        android:background="@android:color/holo_blue_dark"
         android:textSize="18dp" />
 
 </RelativeLayout>

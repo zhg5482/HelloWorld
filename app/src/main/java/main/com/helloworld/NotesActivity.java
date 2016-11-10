@@ -30,6 +30,7 @@ import java.util.Scanner;
 
 public class NotesActivity extends Activity {
 
+    public static final String READ_EXTERNAL_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE;
     private Button button_safe;
     private Button button_back;
     public static final String DIR = "HelloNotes";
@@ -56,7 +57,10 @@ public class NotesActivity extends Activity {
 
         //Toast.makeText(this, "打开记事本", Toast.LENGTH_SHORT).show();
 
+        readSd();//读取记事本内容
+
         safeNotes();
+
         backNotes();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -85,11 +89,21 @@ public class NotesActivity extends Activity {
         });
     }
 
+    /**
+     * 授权
+     */
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    public static final String READ_EXTERNAL_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE;
 
+
+    /**
+     * 检查权限
+     * @param context
+     * @param requestPermission
+     * @param requestCode
+     * @return
+     */
     public static boolean checkPermission(Activity context, String requestPermission, int requestCode) {
         if (Build.VERSION.SDK_INT >= 23) {
             int checkCallPhonePermission = ContextCompat.checkSelfPermission(context, requestPermission);
@@ -106,6 +120,12 @@ public class NotesActivity extends Activity {
     }
 
 
+    /**
+     * 授权
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             if (requestCode == 1) {
@@ -145,10 +165,12 @@ public class NotesActivity extends Activity {
                         + DIR
                         + File.separator
                         + FILENAME); // 定义File类对象
+
+
                 PrintStream out = null; // 打印流对象用于输出
 
                 try {
-                    out = new PrintStream(new FileOutputStream(file, true)); // 追加文件
+                    out = new PrintStream(new FileOutputStream(file, false)); // 追加文件
                     out.println(content);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -157,8 +179,6 @@ public class NotesActivity extends Activity {
                         out.close(); // 关闭打印流
                     }
                 }
-
-                Log.i("haha", file.getAbsolutePath());
 
                 Toast.makeText(NotesActivity.this, "保存成功！", Toast.LENGTH_LONG).show();
 
@@ -282,7 +302,8 @@ public class NotesActivity extends Activity {
                     sb.append(scan.next()).append("\n"); // 设置文本
                 }
 
-                //ToastUtils.showShort(context,sb.toString());
+                notes_txt = (EditText) findViewById(R.id.notes_txt);
+                notes_txt.setText(sb.toString());
 
                 return sb.toString();
             } catch (Exception e) {

@@ -4,10 +4,21 @@
     android:id="@+id/activity_main2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="main.com.helloworld.Main2Activity"
-    android:background="@mipmap/icon2">
+    android:background="@mipmap/icon2"
+    tools:context="main.com.helloworld.Main2Activity">
 
     <include layout="@layout/title_bar" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+
+        </RelativeLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/ll_edit2"
@@ -21,15 +32,14 @@
         <ImageView
             android:id="@+id/img5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/real_text"
-        android:layout_below="@+id/ll_edit2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_edit2"
         android:layout_centerHorizontal="true">
 
         <TextView
@@ -38,39 +48,39 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:text="ereer"
             android:textColor="#1114b6"
-            android:textSize="20dp"
-            android:text="ereer"/>
+            android:textSize="20dp" />
 
         <TextView
-            android:layout_below="@+id/txt5_1"
             android:id="@+id/txt5_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txt5_1"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:text="dgergre"
             android:textColor="#1114b6"
-            android:textSize="20dp"
-            android:text="dgergre"/>
+            android:textSize="20dp" />
 
         <TextView
-            android:layout_below="@+id/txt5_2"
             android:id="@+id/txt5_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txt5_2"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:text="dgergre"
             android:textColor="#1114b6"
-            android:textSize="20dp"
-            android:text="dgergre"/>
+            android:textSize="20dp" />
 
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@+id/real_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/real_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp">
 
@@ -81,11 +91,13 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:background="@color/colorAccent"
-            android:textSize="18dp"
             android:text="打开记事本"
-            />
+            android:textSize="18dp" />
 
     </RelativeLayout>
+
+    <include layout="@layout/bottom" />
+
     <include layout="@layout/webview" />
 
 </RelativeLayout>

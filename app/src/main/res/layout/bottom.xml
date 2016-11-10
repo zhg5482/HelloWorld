@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@android:color/white"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/bottom_btn1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:layout_weight="1"
+        android:onClick="onClick">
+
+        <ImageView
+            android:id="@+id/bottom_img1"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:src="@mipmap/icon" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bottom_img1"
+            android:background="@android:color/white"
+            android:text="菜单1"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_btn2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:layout_weight="1"
+        android:onClick="onClick">
+
+        <ImageView
+            android:id="@+id/bottom_img2"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:src="@mipmap/icon" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bottom_img2"
+            android:background="@android:color/white"
+            android:text="菜单2"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_btn3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:layout_weight="1"
+        android:onClick="onClick">
+
+        <ImageView
+            android:id="@+id/bottom_img3"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:src="@mipmap/icon" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bottom_img3"
+            android:background="@android:color/white"
+            android:text="菜单3"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+</LinearLayout>
