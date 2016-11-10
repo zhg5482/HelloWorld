@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="316ab096444879f8b8b1b06606e57411e13f49ef">
+        sha1="edeefbf200db0335acc711057d7d0155c891f167">
         <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f82cfe1539ca005b1e2369e9a34967b493683421/classes.dex" />
     </item>
     <item
@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="9ea21984b6e1790b471150cb30df9959b7780f6d">
+        sha1="1fe3946b56579015676c4c791fe7b8f34d68ed34">
         <dex dex="/Users/zhg-pc/AndroidStudioProjects/HelloWorld/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_2296fabe19411864f8bec55d9f014c2e64260b0e/classes.dex" />
     </item>
     <item

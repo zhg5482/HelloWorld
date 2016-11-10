@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -55,7 +56,10 @@ public class Main2Activity extends Activity {
                 break;
 
             case R.id.bottom_btn3:
-                Toast.makeText(this, "bottom_btn3", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "bottom_btn3", Toast.LENGTH_SHORT).show();
+                Toast toast = Toast.makeText(getApplicationContext(),"自定义",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
                 break;
 
         }
@@ -68,17 +72,26 @@ public class Main2Activity extends Activity {
      */
     public void onClick(View v) {
         RelativeLayout view = (RelativeLayout) v;
+        Toast toast;
         switch (view.getId()) {
             case R.id.bottom_btn1:
                 Toast.makeText(Main2Activity.this, "bottom_btn1", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.bottom_btn2:
-                Toast.makeText(Main2Activity.this, "bottom_btn2", Toast.LENGTH_SHORT).show();
+                toast = Toast.makeText(getApplicationContext(),"bottom_btn2",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER,0,0);
+                LinearLayout toastView = (LinearLayout) toast.getView();
+                ImageView imageView = new ImageView(getApplicationContext());
+                imageView.setImageResource(R.mipmap.ic_launcher);
+                toastView.addView(imageView,0);
+                toast.show();
                 break;
 
             case R.id.bottom_btn3:
-                Toast.makeText(Main2Activity.this, "bottom_btn3", Toast.LENGTH_SHORT).show();
+                toast = Toast.makeText(getApplicationContext(),"bottom_btn3",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
                 break;
 
         }
