@@ -34,12 +34,9 @@ public class Main2Activity extends Activity {
 
         openWebView();  //加载webview
 
-        openNotes();
+        openNotes();   //打开记事本
 
         backward();   //返回到上一页
-
-
-
 
     }
 
