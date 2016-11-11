@@ -1,13 +1,20 @@
 package main.com.helloworld;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import android.os.Handler;
 
@@ -25,16 +32,17 @@ import java.util.regex.Pattern;
 
 import main.com.helper.HttpUtils;
 
-
 public class MainActivity extends Activity {
 
-    private String mStrContent = null;
-    private static final int MSG_UPDATE_TEXT = 1;
     private static String LOG_URL = "http://test.api.medbanks.cn/user/login";
+    private static final int MSG_UPDATE_TEXT = 1;
+    private RelativeLayout relativeLayout;
+    private String mStrContent = null;
     private EditText hellotv1;
     private EditText hellotv2;
     private String username;
     private String password;
+    private int screenHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,81 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         login();//登录
+
+        //activity_main
+        relativeLayout = (RelativeLayout) super.findViewById(R.id.activity_main);
+        relativeLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        Log.i("起始位置为：", "(" + event.getX() + " , " + event.getY() + ")");
+                }
+                return true;
+            }
+        });
+
+        hellotv1 = (EditText) findViewById(R.id.tx1);
+        hellotv1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        Log.i("edit起始位置为：", "(" + event.getX() + " , " + event.getY() + ")");
+                }
+                return false;
+            }
+        });
+
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        screenHeight = wm.getDefaultDisplay().getHeight();  //页面高度
+        relativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { //全局监听页面
+            @Override
+            public void onGlobalLayout() {
+                Rect rect = new Rect();
+                getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+                int heightDifference = screenHeight - (rect.bottom - rect.top);
+                boolean isKeyboardShowing = heightDifference > screenHeight / 3;
+                Log.i("=====++++:", isKeyboardShowing + " " + heightDifference);
+                scrollView.scrollTo(0,heightDifference);  //页面滑动高度
+            }
+        });
+
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
+
+        //preventCoverLogin(hellotv1);
+        //preventCoverLogin(hellotv2);
+    }
+
+    private ScrollView scrollView;
+
+    /**
+     * 防止遮挡登录按钮
+     *
+     * @param passwordView
+     */
+    private void preventCoverLogin(EditText passwordView) {
+        passwordView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                changeScrollView();
+                return false;
+            }
+        });
+    }
+
+    /**
+     * 200毫秒之后使ScrollView指向底部--防止遮挡登录按钮
+     */
+    private void changeScrollView() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // scrollview.smoothScrollTo(0, tvLogin.getMeasuredHeight() * 2);
+                scrollView.smoothScrollTo(0, 200);
+            }
+
+        }, 100);
     }
 
     /**
@@ -93,7 +176,6 @@ public class MainActivity extends Activity {
         }
     };
 
-
     /**
      * 登录
      */
@@ -128,7 +210,7 @@ public class MainActivity extends Activity {
 
                 if (m.matches() && !username.equals("")) {
                     //请求接口
-                    String url = LOG_URL+"?username=" + username + "&password=" + password;
+                    String url = LOG_URL + "?username=" + username + "&password=" + password;
                     getJsonByInternet(url);
 
                     /**
