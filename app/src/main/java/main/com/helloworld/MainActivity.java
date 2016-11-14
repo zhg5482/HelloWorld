@@ -1,26 +1,20 @@
 package main.com.helloworld;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 import android.os.Handler;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -29,7 +23,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import main.com.helper.HttpUtils;
 
 public class MainActivity extends Activity {
@@ -38,65 +31,64 @@ public class MainActivity extends Activity {
     private static final int MSG_UPDATE_TEXT = 1;
     private RelativeLayout relativeLayout;
     private String mStrContent = null;
+    private ScrollView scrollView;
     private EditText hellotv1;
     private EditText hellotv2;
     private String username;
     private String password;
-    private int screenHeight;
+    private int frist_h = 0;
+    private int second_h = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login();//登录
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
 
-        //activity_main
         relativeLayout = (RelativeLayout) super.findViewById(R.id.activity_main);
-        relativeLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        Log.i("起始位置为：", "(" + event.getX() + " , " + event.getY() + ")");
-                }
-                return true;
-            }
-        });
 
-        hellotv1 = (EditText) findViewById(R.id.tx1);
-        hellotv1.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        Log.i("edit起始位置为：", "(" + event.getX() + " , " + event.getY() + ")");
-                }
-                return false;
-            }
-        });
-
-        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        screenHeight = wm.getDefaultDisplay().getHeight();  //页面高度
         relativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { //全局监听页面
             @Override
             public void onGlobalLayout() {
-                Rect rect = new Rect();
-                getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-                int heightDifference = screenHeight - (rect.bottom - rect.top);
-                boolean isKeyboardShowing = heightDifference > screenHeight / 3;
-                Log.i("=====++++:", isKeyboardShowing + " " + heightDifference);
-                scrollView.scrollTo(0,heightDifference);  //页面滑动高度
+                if(frist_h == 0){
+                    frist_h = relativeLayout.getMeasuredHeight();
+                }
+                Log.i("frist_h",frist_h+"");
             }
         });
-
-        scrollView = (ScrollView) findViewById(R.id.scrollView);
-
-        //preventCoverLogin(hellotv1);
-        //preventCoverLogin(hellotv2);
+        login();//登录
     }
 
-    private ScrollView scrollView;
+
+    //线程接收 滑动activity
+    private Handler handler1 = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case MSG_UPDATE_TEXT:
+                    scrollView.scrollTo(0, (frist_h-second_h));
+                    break;
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    //全局监控屏幕高度
+    private void getScreenHeight(){
+
+        relativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { //全局监听页面
+            @Override
+            public void onGlobalLayout() {
+                if(second_h == 0){
+                    second_h = relativeLayout.getMeasuredHeight();
+                }
+                handler1.sendEmptyMessage(MSG_UPDATE_TEXT);
+            }
+        });
+    }
+
 
     /**
      * 防止遮挡登录按钮
@@ -162,11 +154,9 @@ public class MainActivity extends Activity {
                             Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
 
-
                         } else {
                             Toast.makeText(MainActivity.this, "用户名密码错误", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                     break;
                 default:
@@ -185,8 +175,24 @@ public class MainActivity extends Activity {
         hellotv1 = (EditText) findViewById(R.id.tx1);
         hellotv2 = (EditText) findViewById(R.id.tx2);
 
-        username = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "name", "");
-        password = (String) PreferenceUtil.getObject(getSharedPreferences("haha", MODE_PRIVATE), "pass", "");
+        hellotv1.setOnTouchListener(new View.OnTouchListener() {  //监控editText框onTouch 事件
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                getScreenHeight();
+                return false;
+            }
+        });
+
+        hellotv2.setOnTouchListener(new View.OnTouchListener() {  //监控editText框onTouch 事件
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                getScreenHeight();
+                return false;
+            }
+        });
+
+        username = (String) PreferenceUtil.getObject(getSharedPreferences("userInfo", MODE_PRIVATE), "name", "");
+        password = (String) PreferenceUtil.getObject(getSharedPreferences("userInfo", MODE_PRIVATE), "pass", "");
 
         if (username != null || password != null) {
             hellotv1.setText(username);
@@ -216,8 +222,8 @@ public class MainActivity extends Activity {
                     /**
                      * 保存登录信息
                      **/
-                    PreferenceUtil.putObject(getSharedPreferences("haha", MODE_PRIVATE), "name", username);
-                    PreferenceUtil.putObject(getSharedPreferences("haha", MODE_PRIVATE), "pass", password);
+                    PreferenceUtil.putObject(getSharedPreferences("userInfo", MODE_PRIVATE), "name", username);
+                    PreferenceUtil.putObject(getSharedPreferences("userInfo", MODE_PRIVATE), "pass", password);
                 } else {
                     Toast.makeText(MainActivity.this, "输入有误! 不能为空或非数字!", Toast.LENGTH_SHORT).show();
                 }
