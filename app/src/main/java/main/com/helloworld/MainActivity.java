@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
     private EditText hellotv2;
     private String username;
     private String password;
-    private int frist_h = 0;
+    private int first_h = 0;
     private int second_h = 0;
 
     @Override
@@ -51,10 +51,10 @@ public class MainActivity extends Activity {
         relativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { //全局监听页面
             @Override
             public void onGlobalLayout() {
-                if(frist_h == 0){
-                    frist_h = relativeLayout.getMeasuredHeight();
+                if(first_h == 0){
+                    first_h = relativeLayout.getMeasuredHeight();
                 }
-                Log.i("frist_h",frist_h+"");
+                Log.i("first_h",first_h+"");
             }
         });
         login();//登录
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case MSG_UPDATE_TEXT:
-                    scrollView.scrollTo(0, (frist_h-second_h));
+                    scrollView.scrollTo(0, (first_h-second_h));
                     break;
                 default:
                     break;
