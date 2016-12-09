@@ -3,6 +3,7 @@ package main.com.helloworld;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 import org.json.JSONException;
@@ -60,12 +62,15 @@ public class MainActivity extends Activity {
             }
         });
         login();//登录
+
+        register(); //注册
     }
 
 
     //线程接收 滑动activity
     private Handler handler1 = new Handler() {
         public void handleMessage(android.os.Message msg) {
+
             switch (msg.what) {
                 case MSG_UPDATE_TEXT:
                     scrollView.scrollTo(0, (first_h-second_h));
@@ -298,5 +303,32 @@ public class MainActivity extends Activity {
             map.put("avatar", ObjectInfo.optString("avatar"));
         }
         return map;
+    }
+
+    //onclick
+    /*public void onClick(View v) {
+        RelativeLayout view = (RelativeLayout) v;
+
+        switch (view.getId()) {
+            case R.id.register_id:   //注册用户
+                Toast.makeText(this, "register", Toast.LENGTH_SHORT).show();
+                System.exit(-1);
+                Intent intent = new Intent(MainActivity.this, RegistActivity.class);
+                startActivity(intent);
+                break;
+
+        }
+    }*/
+
+    //注册
+    private void register(){
+        TextView register = (TextView) findViewById(R.id.register_id);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegistActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
